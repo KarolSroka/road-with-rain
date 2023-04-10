@@ -175,13 +175,14 @@ function animate(){
         carSpanCooldown = Math.floor(Math.random() * 60) + 20;
     }
     carSpanCooldown--
+    if(cars.length > 0){
     for(let i = cars.length - 1;i != 0;i--){
         cars[i].update();
 
         if(cars[i].position.y - 2*cars[i].height > canvas.height || cars[i].position.y + 2 * cars[i].height < 0){
-            cars.splice(1, i);
+            cars.splice(i, 1);
         }
-    }
+    }}
 
     if(cooldown < 1){
         generateRain();
@@ -189,13 +190,14 @@ function animate(){
     }
     cooldown--
 
+    if(drops.length > 0){
     for(let i = drops.length - 1;i != 0;i--){
         drops[i].update();
 
         if(drops[i].position.y > canvas.width){
             drops.splice(1, i);
         }
-    }
+    }}
 
     nextLevel();
     levelbox.innerHTML = `LEVEL: ${level}`
